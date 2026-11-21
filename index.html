@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Bionutritionals - Amino Formula</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Color Variables */
+        :root {
+            --bg-color: #0b1e36; /* Darker Navy Blue from screenshot */
+            --text-white: #ffffff;
+            --text-blue: #62a8d8;
+            --btn-orange: #d97706; /* Orange button from screenshot */
+            --btn-orange-hover: #b45309;
+            --text-dark: #333333;
+            --popup-teal: #0d4a5b;
+            --green-icon: #16a34a;
+        }
+
+        /* Allow scrolling for the new content */
+        html, body {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            overflow-y: auto !important; 
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Top Section Wrapper with Angled Bottom */
+        .top-section {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            /* Creates the angled cut-off at the bottom */
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            padding-bottom: 80px; 
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            color: var(--text-blue);
+            font-size: 2rem;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-blue);
+        }
+
+        .btn {
+            background-color: var(--btn-orange);
+            color: var(--text-white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-orange-hover);
+        }
+
+        /* Main Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        /* Thumbnails (Left Side) */
+        .hero-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .hero-thumbnails img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            background-color: #fff;
+        }
+
+        /* Center Image with Badge */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .main-bottle {
+            max-width: 380px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.4));
+        }
+
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle, #facc15 0%, #eab308 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 3px solid #dc2626;
+            transform: rotate(-10deg);
+            z-index: 2;
+        }
+
+        .badge::before {
+            content: "MONEY BACK";
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            margin-bottom: -5px;
+        }
+
+        .badge .percent {
+            font-size: 1.8rem;
+            line-height: 1;
+            color: #b91c1c;
+        }
+
+        .badge .guarantee {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Text (Right Side) */
+        .hero-text {
+            flex: 1;
+            max-width: 550px;
+            text-align: left;
+        }
+
+        .hero-text h1 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .hero-text p {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .main-btn {
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            width: 100%;
+            text-align: center;
+            border-radius: 6px;
+        }
+
+        /* --- NEW CONTENT SECTION (Below the fold) --- */
+        .features-section {
+            background-color: #ffffff;
+            padding: 100px 5% 120px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .features-container {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .feature-card {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-icon {
+            margin-bottom: 25px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 80px;
+            height: 80px;
+            fill: none;
+            stroke: var(--green-icon);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-card h3 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            min-height: 70px; /* Keeps alignment */
+        }
+
+        .feature-card p {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #444;
+            text-align: left;
+        }
+
+        /* --- COOKIE POPUP STYLES --- */
+        .cookie-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            touch-action: none;
+        }
+
+        .cookie-modal {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cookie-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ffffff;
+            border: 2px solid #000;
+            border-radius: 5px;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+        }
+
+        .cookie-modal h2 {
+            color: var(--popup-teal);
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cookie-modal p {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .cookie-modal p a {
+            color: #8a2be2;
+            text-decoration: underline;
+        }
+
+        .cookie-accept-btn {
+            background-color: var(--popup-teal);
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cookie-accept-btn:hover {
+            background-color: #0a3845;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-text p { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 992px) {
+            .top-section {
+                clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
+            }
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 30px;
+            }
+            .hero-thumbnails {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-text {
+                max-width: 100%;
+            }
+            .hero-text h1, .hero-text p {
+                text-align: center;
+            }
+            .badge {
+                right: -20px;
+                width: 100px;
+                height: 100px;
+            }
+            .badge .percent { font-size: 1.4rem; }
+            .badge .guarantee { font-size: 0.6rem; }
+            nav ul { display: none; }
+            
+            .features-container {
+                flex-direction: column;
+                gap: 60px;
+            }
+            .feature-card p {
+                text-align: center;
+                max-width: 600px;
+            }
+            .feature-card h3 {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-text p { font-size: 1.1rem; }
+            .logo { font-size: 1.2rem; }
+            .cookie-modal { padding: 30px 20px; }
+            .cookie-modal h2 { font-size: 1.6rem; }
+            .cookie-modal p { font-size: 1rem; }
+            .feature-card h3 { font-size: 1.6rem; }
+            .feature-card p { font-size: 1rem; }
+            .main-bottle { max-width: 280px; }
+        }
+    </style>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-KQG-nd_C5IAXCkHJWvCcT.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+</head>
+<body>
+
+    <!-- Wrapper for the top blue section -->
+    <div class="top-section">
+        
+        <!-- Header Section -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🧬</span> 
+                <div>advanced<br>bionutritionals<sup style="font-size:0.6rem;">®</sup></div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Ingredients</a></li>
+                    <li><a href="#">Guarantee</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <a href="#" class="btn">Order Now</a>
+        </header>
+
+        <!-- Main Hero Section -->
+        <main class="hero-section">
+            
+            <!-- Left Side: Thumbnails -->
+            <div class="hero-thumbnails">
+                <!-- Placeholder images for thumbnails (Aap yahan apni actual images ka link daal sakte hain) -->
+                <img src="https://via.placeholder.com/80x80/e2e8f0/475569?text=Bottle" alt="Thumbnail 1">
+                <img src="https://via.placeholder.com/80x80/e2e8f0/475569?text=Facts" alt="Thumbnail 2">
+                <img src="https://via.placeholder.com/80x80/e2e8f0/475569?text=Testimonial" alt="Thumbnail 3">
+                <img src="https://via.placeholder.com/80x80/e2e8f0/475569?text=Testimonial" alt="Thumbnail 4">
+            </div>
+
+            <!-- Center: Image with Badge -->
+            <div class="hero-image-wrapper">
+                <div class="badge">
+                    <div class="percent">100%</div>
+                    <div class="guarantee">MONEY BACK</div>
+                    <div class="guarantee">GUARANTEED</div>
+                </div>
+                <!-- Bottle Image (Yahan apni bottle ka image link daalein) -->
+                <img src="https://advancedbionutritionals-advanced-mitochondrial.rapid-pond-1dec.workers.dev/advanced.png" alt="Advanced Amino Formula Bottle" class="main-bottle">
+            </div>
+
+            <!-- Right Side: Text -->
+            <div class="hero-text">
+                <h1>“It Feels Like My Muscles Are Waking Up and Working” – Jacqui</h1>
+                <p>This combination of 8 essential amino acids gives your body the building blocks to make all the protein it needs so you can feel fitter, stronger, and younger.</p>
+                <a href="#" class="btn main-btn">Order Now</a>
+            </div>
+
+        </main>
+    </div> 
+
+    <!-- --- NEW 3-COLUMN CONTENT SECTION --- -->
+    <section class="features-section">
+        <div class="features-container">
+            
+            <!-- Column 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Bicep Icon -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 18h12v-2c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v2z"></path>
+                        <path d="M12 14V8"></path>
+                        <path d="M9 11h6"></path>
+                        <path d="M12 4v4"></path>
+                    </svg>
+                </div>
+                <h3>Build New and<br>Stronger Muscle</h3>
+                <p>The average person loses 30% of their muscle mass by the time they’re 70. But it doesn’t have to happen to you. That’s because research has shown that you can reverse muscle loss and strengthen your muscle by taking Advanced Amino Formula.</p>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Dumbbell Icon -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6.5 6.5v11"></path>
+                        <path d="M17.5 6.5v11"></path>
+                        <path d="M3 9v6"></path>
+                        <path d="M21 9v6"></path>
+                        <path d="M6.5 12h11"></path>
+                    </svg>
+                </div>
+                <h3>Post-Workout<br>Recovery</h3>
+                <p>With Advanced Amino Formula, you can recover from workouts faster and build new and stronger muscle. Advanced Amino Formula also provides the critical amino acids that help your body generate and repair damaged ligaments.</p>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Lightning Icon -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                </div>
+                <h3>Amino Energy and<br>Performance</h3>
+                <p>Your cells need the right balance of all eight essential amino acids to maintain strength and stamina. That’s why Advanced Amino Formula is so effective at improving your energy and performance. It works even for people who suffer from severe fatigue and exhaustion.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- --- COOKIE POPUP HTML --- -->
+    <div id="cookiePopup" class="cookie-overlay">
+        <div class="cookie-modal">
+            <button class="cookie-close-btn" onclick="redirectToPage()">✕</button>
+            <h2>Cookie Notice</h2>
+            <p>This website uses cookies to personalize content and ads, provide social media features, and analyze our traffic. By clicking Accept, you agree to the use of cookies.<br>For more information, visit our <a href="https://www.advancedbionutritionals.com/DS24/Advanced-Mitochondrial/Too-Tired-To-Enjoy-It/HD.htm#aff=faizkhan765644f7c3">Cookie Policy</a></p>
+            <button class="cookie-accept-btn" onclick="redirectToPage()">Accept and Continue</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for redirect -->
+    <script>
+        function redirectToPage() {
+            window.location.href = "https://www.advancedbionutritionals.com/DS24/Advanced-Mitochondrial/Too-Tired-To-Enjoy-It/HD.htm#aff=faizkhan765644f7c3";
+        }
+    </script>
+
+</body>
+</html>
